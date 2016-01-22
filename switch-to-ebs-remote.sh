@@ -68,7 +68,7 @@ docker run -d --log-driver=syslog --name=taupageapp --restart=on-failure:10 \
     -p 7199:7199 \
     --net=host \
     registry.opensource.zalan.do/mop/stups-cassandra:2.0.17-p0-SNAPSHOT
-sleep 5
+sleep 15
 
 echo "Configuring OpsCenter agent in a hacky way"
 ADDRESS_YAML="stomp_interface: $OPSCENTER_IP\nhosts: [\"$LOCAL_IP\"]\ncassandra_conf: /opt/cassandra/conf/cassandra.yaml"
@@ -77,9 +77,11 @@ echo "address.yaml:"
 cat address.yaml
 docker cp address.yaml $CONTAINER_ID:/var/lib/datastax-agent/conf/address.yaml
 docker exec -it $CONTAINER_ID service datastax-agent restart
+sleep 10
 
 echo "Running nodetool repair in 10 seconds."
 sleep 10
 
 echo "Running nodetool repair -h $LOCAL_IP"
 docker exec -it $CONTAINER_ID /opt/cassandra/bin/nodetool repair -h $LOCAL_IP
+
