@@ -68,7 +68,8 @@ docker run -d --log-driver=syslog --name=taupageapp --restart=on-failure:10 \
     -p 7199:7199 \
     --net=host \
     registry.opensource.zalan.do/mop/stups-cassandra:2.0.17-p0-SNAPSHOT
-sleep 15
+sleep 10
+export CONTAINER_ID=$(docker ps -q)
 
 echo "Configuring OpsCenter agent in a hacky way"
 ADDRESS_YAML="stomp_interface: $OPSCENTER_IP\nhosts: [\"$LOCAL_IP\"]\ncassandra_conf: /opt/cassandra/conf/cassandra.yaml"
