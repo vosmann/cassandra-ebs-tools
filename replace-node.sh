@@ -14,6 +14,7 @@ CLUSTER_NAME=
 OPSCENTER=
 IMAGE=
 SEEDS=
+
 APP_ID=reco-cassandra
 APP_VERSION=transfer-no-asg
 TAG=$APP_ID-$APP_VERSION
@@ -76,19 +77,17 @@ ports:
   61621: 61621
 volumes:
   ebs:
-    /dev/xvdf: test-cassandra-data-volume
-    /dev/xvdg: test-cassandra-commitlog-volume
+    /dev/xvdf: cassandra-data-volume
+    /dev/xvdg: cassandra-commitlog-volume
 mounts:
   /var/cassandra/data/data:
     partition: /dev/xvdf
     erase_on_boot: false
     filesystem: ext4
-    options: noatime,nodiratime,nobarrier
   /var/cassandra/data/commitlog:
     partition: /dev/xvdg
     erase_on_boot: false
     filesystem: ext4
-    options: noatime,nodiratime,nobarrier
 environment:
   CLUSTER_NAME: $CLUSTER_NAME
   OPSCENTER: $OPSCENTER
