@@ -1,0 +1,39 @@
+#taupage-ami-config
+application_id: cassandra
+application_version: transfer-no-asg
+runtime: Docker
+root: true
+source: 
+scalyr_account_key: 
+mint_bucket: 
+networking: host
+ports:
+  7000: 7000
+  7199: 7199
+  8778: 8778
+  9042: 9042
+  9160: 9160
+  61621: 61621
+volumes:
+  ebs:
+    /dev/xvdf: cassandra-data-volume
+    /dev/xvdg: cassandra-commitlog-volume
+mounts:
+  /var/cassandra/data/data:
+    partition: /dev/xvdf
+    erase_on_boot: false
+    filesystem: ext4
+  /var/cassandra/data/commitlog:
+    partition: /dev/xvdg
+    erase_on_boot: false
+    filesystem: ext4
+environment:
+  CLUSTER_NAME: My-Cassandra
+  OPSCENTER: 10.64.112.168
+  TTL: 120
+  DATA_DIR: /var/cassandra/data/data
+  COMMIT_LOG_DIR: /var/cassandra/data/commitlog
+  SNITCH: GossipingPropertyFileSnitch
+  DATACENTER: AWS
+  APPLICATION_ID: cassandra
+  SEEDS: 

@@ -15,7 +15,7 @@ OPSCENTER=
 IMAGE=
 SEEDS=
 
-APP_ID=reco-cassandra
+APP_ID=cassandra
 APP_VERSION=transfer-no-asg
 TAG=$APP_ID-$APP_VERSION
 INSTANCE_TYPE=c4.2xlarge

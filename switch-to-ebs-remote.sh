@@ -25,7 +25,7 @@ docker ps
 
 export CONTAINER_ID=$(docker ps -q)
 export LOCAL_IP=$(curl -Ls -m 4 http://169.254.169.254/latest/meta-data/local-ipv4)
-export OPSCENTER_IP=10.10.10.10
+export OPSCENTER_IP=
 
 echo "Stopping container with ID: $CONTAINER_ID in 10 seconds. Will copy files and restart."
 sleep 10
@@ -84,5 +84,5 @@ echo "Running nodetool repair in 10 seconds."
 sleep 10
 
 echo "Running nodetool repair -h $LOCAL_IP"
-docker exec -it $CONTAINER_ID /opt/cassandra/bin/nodetool repair -h $LOCAL_IP
+# docker exec -it $CONTAINER_ID /opt/cassandra/bin/nodetool repair --in-local-dc -h $LOCAL_IP
 
