@@ -37,8 +37,9 @@ Parameters for your own deployment need to be set in the script' environment var
 
 ## switch-to-ebs.sh and switch-to-ebs-remote.sh
 Switches an existing node from using an internal storage SSD to EBS. The EBS volumes need to be prepared
-beforehand. Their IDs are then set as parameters in this script. The script attaches them, shuts down
-Cassandra and copies the data and commit log directories from the instance store to the EBS volumes.
+[beforehand](https://github.com/vosmann/ebs-tools). Their IDs are then set as parameters in this script.
+The script attaches them, shuts down Cassandra and copies the data and commit log directories from
+the instance store to the EBS volumes.
 
 ## replace-node.sh
 
